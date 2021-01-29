@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Trxgically\XPBottles;
+namespace Trxgically\XpBottles;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
