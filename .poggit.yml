@@ -5,4 +5,5 @@ branches:
 projects:
   XpBottles:
     path: ""
+    icon: "logo.png"
 ...
