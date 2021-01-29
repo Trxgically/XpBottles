@@ -27,7 +27,6 @@ class Main extends PluginBase implements Listener{
     public function onEnable(): void
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getLogger()->info("XPBottles enabled!");
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
@@ -54,7 +53,7 @@ class Main extends PluginBase implements Listener{
         $e->setXpDropAmount(0);
 
         if($xp > 0){
-            $e->setDrops([$item]); // Set the new drops array
+            $e->setDrops(array_merge($e->getDrops(), [$item]));
         }
 
     }
