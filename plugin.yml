@@ -1,6 +1,6 @@
 ---
-name: XPBottles
+name: XpBottles
 version: 1.0
-main: Trxgically\XPBottles\Main
+main: Trxgically\XpBottles\Main
 api: 3.17.2
 ...
