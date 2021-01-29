@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Trxgically\XpBottles;
+namespace Trxgically\XPBottles;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -22,12 +22,12 @@ use pocketmine\plugin\PluginBase;
 
 use pocketmine\command\{Command, CommandSender, ConsoleCommandSender};
 
-class Main extends PluginBase implements Listener
-{
+class Main extends PluginBase implements Listener{
 
     public function onEnable(): void
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->getLogger()->info("XPBottles enabled!");
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
@@ -51,13 +51,10 @@ class Main extends PluginBase implements Listener
         $item->setCustomName(TF::BOLD . TF::GREEN . "Experience Bottle");
         $item->setLore(["\n" . TF::BOLD . TF::WHITE . $username . TF::RESET . TF::GRAY . " was killed!\n" . TF::DARK_GRAY . "Click or tap to claim " . $xp . " experience!"]);
         $item->setNamedTagEntry(new tag\StringTag("experience", (string)$xp));
-        $item->getMaxStackSize(1);
         $e->setXpDropAmount(0);
 
         if($xp > 0){
             $e->setDrops([$item]); // Set the new drops array
-        }else if($xp <= 0){
-            return;
         }
 
     }
@@ -96,3 +93,4 @@ class Main extends PluginBase implements Listener
     }
 
 }
+
