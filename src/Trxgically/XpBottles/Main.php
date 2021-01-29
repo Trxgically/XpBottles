@@ -66,7 +66,7 @@ class Main extends PluginBase implements Listener{
         $item = $e->getItem();
 
 
-        if($item->getName == (TF::BOLD . TF::GREEN . "Experience Bottle")){
+        if($item->getName() == (TF::BOLD . TF::GREEN . "Experience Bottle")){
             if($item->getId() == 384){
                 $tag = $item->getNamedTagEntry("experience")->getValue();
                 $e->getPlayer()->addXp((int)$tag);
