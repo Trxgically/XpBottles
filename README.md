@@ -5,7 +5,6 @@ Looking for a plugin strictly focused on retrieving XP from a bottle when you ki
 
 * To-Do list:
   * - [ ] Make plugin more customizable.
-  * - [ ] Make xp bottles non-stackable.
-
+  * - [ ] Fix dupe bug
   > Feel free to leave me plugin suggestions at [Discord](https://discord.gg/bkcByHZ)
   
