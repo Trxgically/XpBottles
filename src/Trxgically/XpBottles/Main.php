@@ -50,11 +50,31 @@ class Main extends PluginBase implements Listener{
         $item->setCustomName(TF::BOLD . TF::GREEN . "Experience Bottle");
         $item->setLore(["\n" . TF::BOLD . TF::WHITE . $username . TF::RESET . TF::GRAY . " was killed!\n" . TF::DARK_GRAY . "Click or tap to claim " . $xp . " experience!"]);
         $item->setNamedTagEntry(new tag\StringTag("experience", (string)$xp));
+        $item->setCount(1);
         $e->setXpDropAmount(0);
 
         if($xp > 0){
             $e->setDrops(array_merge($e->getDrops(), [$item]));
         }
+
+    }
+
+
+    public function onProjectileLaunch(ProjectileLaunchEvent $e) {
+        $entity = $e->getEntity();
+        $player = $entity->getOwningEntity();
+        $username = $player->getNameTag();
+
+        if ($player === null) return;
+        if (!$player instanceof Player) return;
+
+        $inv = $player->getInventory();
+        $item = $inv->getItemInHand();
+
+            if($item->getName() == TF::BOLD . TF::GREEN . "Experience Bottle") {
+                $e->setCancelled();
+            }
+        //}
 
     }
 
@@ -65,7 +85,7 @@ class Main extends PluginBase implements Listener{
         $item = $e->getItem();
 
 
-        if($item->getName() == (TF::BOLD . TF::GREEN . "Experience Bottle")){
+        if($item->getName() === (TF::BOLD . TF::GREEN . "Experience Bottle")){
             if($item->getId() == 384){
                 $tag = $item->getNamedTagEntry("experience")->getValue();
                 $e->getPlayer()->addXp((int)$tag);
@@ -74,22 +94,18 @@ class Main extends PluginBase implements Listener{
         }
     }
 
-    public function onProjectileLaunch(ProjectileLaunchEvent $e) {
-        $entity = $e->getEntity();
-        $player = $entity->getOwningEntity();
-
-        if ($player === null) return;
-        if (!$player instanceof Player) return;
-
-        $inv = $player->getInventory();
-        $item = $inv->getItemInHand();
-        $name = $item->getName();
-
-        if ($name === TF::BOLD . TF::GREEN . "Experience Bottle") {
-            $e->setCancelled();
+    public function onTap(PlayerInteractEvent $e){
+        $player = $e->getPlayer();
+        $name = $player->getName();
+        $item = $player->getInventory()->getItemInHand();
+        if($item->getName() === (TF::BOLD . TF::GREEN . "Experience Bottle")){
+            if($item->getId() == 384){
+                $player->getInventory()->setItemInHand(Item::get(Item::AIR));
+                $item->pop();
+                $player->getInventory()->setItemInHand($item);
+            }
         }
-
     }
 
-}
 
+}
